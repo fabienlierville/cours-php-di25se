@@ -17,12 +17,14 @@ class AdminArticleController extends AbstractController{
     public function add()
     {
         $article = new Article();
-        $article->setTitre("Article concernant le code PHP")
-            ->setDescription("fdsfdfdsfds fds dsf f ds fds")
-            ->setDatePublication(new \DateTime())
-            ->setAuteur("John Doe");
-        $id = Article::SqlAdd($article);
-        header("Location:/?controller=AdminArticle&action=list");
+        $article->setTitre($_POST['Titre']);
+        $article->setDescription($_POST['Description']);
+        $article->setAuteur($_POST['Auteur']);
+        $article->setDatePublication(new \DateTime($_POST['DatePublication']));
+
+        Article::SqlAdd($article);
+
+        return $this->twig->render('admin/article/add.html.twig');
     }
     public function fixtures(){
         $requete = BDD::getInstance()->prepare("TRUNCATE TABLE articles")->execute();
