@@ -1,0 +1,15 @@
+{
+  "name": "vendor_name/cesi",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "flierville",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "twig/twig": "^3.24"
+  }
+}
