@@ -1,0 +1,24 @@
+{% extends"base.html.twig" %}
+{% block title %} {{ parent() }} > Espace d'administration {% endblock %}
+{# commentaire #}
+
+{% block body %}
+    <h1>Espace Administration > Liste des articles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Titre</th>
+                <th scope="col">DatePublication</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ dump(articles) }}
+
+        </tbody>
+
+    </table>
+{% endblock %}

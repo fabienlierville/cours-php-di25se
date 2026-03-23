@@ -1,4 +1,6 @@
 <?php
+require_once '../vendor/autoload.php';
+
 // Autoloader de Classe
 function chargerClasse($class){
     $ds = DIRECTORY_SEPARATOR;

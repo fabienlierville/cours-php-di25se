@@ -3,11 +3,13 @@ namespace src\Controller;
 
 use src\Model\Article;
 
-class AdminArticleController{
+
+class AdminArticleController extends AbstractController{
 
     public function list(){
         $articles = Article::SqlGetAll();
-        echo'<h1>Admininistration des articles</h1>';
-        var_dump($articles);
+        return $this->twig->render('admin/article/list.html.twig', [
+            'articles' => $articles
+        ]);
     }
 }
