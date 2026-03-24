@@ -4,7 +4,7 @@
 {% block body %}
     <h1>Ajout Article</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <input type="text" class="form-control" placeholder="Saisir un titre" name="Titre">
@@ -20,11 +20,15 @@
 
         <div class="mb-3">
             <select class="form-select" name="Auteur">
-                <option value="Brice">Pierre</option>
-                <option value="Bruno">Paul</option>
-                <option value="Fabien">Jacques</option>
-                <option value="Marion">Fabien</option>
+                <option value="Brice">Brice</option>
+                <option value="Bruno">Bruno</option>
+                <option value="Fabien">Fabien</option>
+                <option value="Marion">Marion</option>
             </select>
+        </div>
+
+        <div class="mb3">
+            <input type="file"  name="Image">
         </div>
 
         <button type="submit" class="btn btn-primary">Valider</button>
