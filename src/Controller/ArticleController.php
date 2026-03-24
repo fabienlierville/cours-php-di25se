@@ -17,6 +17,18 @@ class ArticleController extends AbstractController{
         ]);
     }
 
+    public function search(){
+        if(isset($_POST['Search']))
+        {
+            $articles = Article::SqlSearch($_POST['Search']);
+            return $this->twig->render("front/article/search.html.twig",[
+                "articles" => $articles,
+                "keyword" => $_POST['Search']
+            ]);
+        }
+
+        Header("location: / "); //rien dans la recherche retour à l’accueil
+    }
 
 
 }
