@@ -43,8 +43,6 @@ class AdminArticleController extends AbstractController{
                 }
             }
 
-
-            die();
             $article = new Article();
             $article->setTitre($_POST['Titre']);
             $article->setDescription($_POST['Description']);
