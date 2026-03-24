@@ -133,13 +133,13 @@ class Article {
         $article = $req->fetch(\PDO::FETCH_ASSOC);
         $articleObj = new Article();
         $date = new \DateTime($article['DatePublication']);
-        $article->setId($article['Id']);
-        $article->setTitre($article['Titre']);
-        $article->setDescription($article['Description']);
-        $article->setAuteur($article['Auteur']);
-        $article->setDatePublication($date);
-        $article->setImageRepository($article['ImageRepository']);
-        $article->setImageFilename($article['ImageFilename']);
+        $articleObj->setId($article['Id']);
+        $articleObj->setTitre($article['Titre']);
+        $articleObj->setDescription($article['Description']);
+        $articleObj->setAuteur($article['Auteur']);
+        $articleObj->setDatePublication($date);
+        $articleObj->setImageRepository($article['ImageRepository']);
+        $articleObj->setImageFilename($article['ImageFileName']);
         return $articleObj;
     }
 }
