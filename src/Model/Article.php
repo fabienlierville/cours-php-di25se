@@ -124,4 +124,22 @@ class Article {
         $req->execute();
         return $bdd->lastInsertId();
     }
+
+    public static function SqlGetById($id){
+        $bdd = BDD::getInstance();
+        $req = $bdd->prepare("SELECT * FROM articles WHERE Id = :id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+        $article = $req->fetch(\PDO::FETCH_ASSOC);
+        $articleObj = new Article();
+        $date = new \DateTime($article['DatePublication']);
+        $article->setId($article['Id']);
+        $article->setTitre($article['Titre']);
+        $article->setDescription($article['Description']);
+        $article->setAuteur($article['Auteur']);
+        $article->setDatePublication($date);
+        $article->setImageRepository($article['ImageRepository']);
+        $article->setImageFilename($article['ImageFilename']);
+        return $articleObj;
+    }
 }

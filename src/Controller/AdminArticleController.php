@@ -78,4 +78,11 @@ class AdminArticleController extends AbstractController{
         header('location: /?controller=AdminArticle&action=list ');
     }
 
+    public function show($id){
+        $article = Article::SqlGetById($id);
+        return $this->twig->render('admin/article/show.html.twig', [
+            'article' => $article
+        ]);
+    }
+
 }
