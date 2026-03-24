@@ -85,4 +85,52 @@ class AdminArticleController extends AbstractController{
         ]);
     }
 
+    public function edit($id)
+    {
+        $article = Article::SqlGetById($id);
+
+        if($_POST){
+            $sqlRepository = null;
+            $nomImage = null;
+
+            if(!empty($_FILES['Image']['name'])){
+                //Récupération du type mime de fichier
+                $finfo = new \finfo(FILEINFO_MIME_TYPE);
+                $mimeType = $finfo->file($_FILES['Image']['tmp_name']);
+                $allowedMimeTypes = array('image/jpeg', 'image/png', 'image/gif', 'image/webp');
+
+                if(in_array($mimeType, $allowedMimeTypes)){
+                    //Répertoire
+                    $dateNow = new \DateTime();
+                    $sqlRepository = $dateNow->format('Y/m');
+                    $repository = "./uploads/images/".$sqlRepository;
+                    if(!is_dir($repository)){
+                        mkdir($repository, 0777, true);
+                    }
+                    //Nom de l'image
+                    $extension = pathinfo($_FILES['Image']['name'], PATHINFO_EXTENSION);
+                    //Le fichier est il autorisé ?
+                    $nomImage = md5(uniqid()) . '.' . $extension;
+                    //Envoi du fichier
+                    move_uploaded_file($_FILES['Image']['tmp_name'], $repository . '/' . $nomImage);
+                }
+            }
+
+            $article = new Article();
+            $article->setTitre($_POST['Titre']);
+            $article->setDescription($_POST['Description']);
+            $article->setAuteur($_POST['Auteur']);
+            $article->setDatePublication(new \DateTime($_POST['DatePublication']));
+            $article->setImageRepository($sqlRepository);
+            $article->setImageFilename($nomImage);
+
+            Article::SqlAdd($article);
+            header('Location:/?controller=AdminArticle&action=list');
+        }
+
+
+        return $this->twig->render('admin/article/edit.html.twig',[
+            'article' => $article
+        ]);
+    }
 }
