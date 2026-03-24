@@ -90,8 +90,8 @@ class AdminArticleController extends AbstractController{
         $article = Article::SqlGetById($id);
 
         if($_POST){
-            $sqlRepository = null;
-            $nomImage = null;
+            $sqlRepository = $article->getImageRepository();
+            $nomImage = $article->getImageFilename();
 
             if(!empty($_FILES['Image']['name'])){
                 //Récupération du type mime de fichier
@@ -116,7 +116,7 @@ class AdminArticleController extends AbstractController{
                 }
             }
 
-            $article = new Article();
+            //$article = new Article();
             $article->setTitre($_POST['Titre']);
             $article->setDescription($_POST['Description']);
             $article->setAuteur($_POST['Auteur']);
@@ -124,8 +124,8 @@ class AdminArticleController extends AbstractController{
             $article->setImageRepository($sqlRepository);
             $article->setImageFilename($nomImage);
 
-            Article::SqlAdd($article);
-            header('Location:/?controller=AdminArticle&action=list');
+            Article::SqlUpdate($article);
+            header('Location:/?controller=AdminArticle&action=show&param='.$article->getId());
         }
 
 
