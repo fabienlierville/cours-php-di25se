@@ -123,7 +123,6 @@ class AdminArticleController extends AbstractController{
             $article->setDatePublication(new \DateTime($_POST['DatePublication']));
             $article->setImageRepository($sqlRepository);
             $article->setImageFilename($nomImage);
-
             Article::SqlUpdate($article);
             header('Location:/?controller=AdminArticle&action=show&param='.$article->getId());
         }
